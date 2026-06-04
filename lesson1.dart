@@ -1,4 +1,9 @@
 void main() {
-  // This is a simple Dart program that prints "Hello, World!" to the console.
+  const pi = "про дарт";
+  final date = DateTime.now();
+  print(date);
   print('Hello, World!');
+  dynamic variable = 42;
+  variable = "Hello, Dart!";
+  print(variable);
 }
