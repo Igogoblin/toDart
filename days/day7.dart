@@ -2,28 +2,60 @@
 Самопроверка: Программа не должна уходить в бесконечный цикл при неверном вводе и не должна позволять уходить в минус.
 */
 /*
-надо зациклить 
+1. проходиться циклом
+2. проверять не надо ли заканчивать
+3. вычислять действия согласно условию
+4. записывать в массив действия
 
 */
+import 'dart:io';
+
 void main() {
-    int step = 1;
-    int 
-    List<String> History = [];
-   // while(step==1){
-
-//    }
+  int forAut = 1;
+  int step = 0;
+  int balance = 100;
+  List<String> History = [];
+  while (forAut == 1) {
+    step++;
+    roles();
+    int iteration = input();
+    if (iteration == 1) {
+      print("Ваш баланс: $balance");
+      History.add("Шаг $step, Ваш баланс: $balance");
+    } else if (iteration == 2) {
+      print("Введите сумму для пополнения: ");
+      int sum = input();
+      balance = balance + sum;
+      print("Ваш баланс: $balance");
+      History.add("Шаг $step, Ваш баланс: $balance");
+    } else if (iteration == 3) {
+      print("Введите сумму для снятия: ");
+      if (int.parse(stdin.readLineSync()!) > balance) {
+        print("Недостаточно средств");
+        continue;
+      } else {
+        int sum = input();
+        balance = balance - sum;
+        print("Ваш баланс: $balance");
+        History.add("Шаг $step, Ваш баланс: $balance");
+      }
+    } else if (iteration == 4) {
+      forAut = 0;
+      print("Пока!");
+    }
+  }
 }
 
-void UserInterface(){
-    Roles();
+int input() {
+  try {
     int iteration = int.parse(stdin.readLineSync()!);
-    Iteration(iteration);
+    return iteration;
+  } catch (e) {
+    print("Ошибка ввода. Пожалуйста, введите число.");
+    return input();
+  }
 }
 
-void Iteration(i) {
-    if(){}
-}
-
-void Roles() {
-    print("действие: 1 — проверить баланс, 2 — пополнить, 3 — снять, 4 — выход.");
+void roles() {
+  print("действие: 1 — проверить баланс, 2 — пополнить, 3 — снять, 4 — выход.");
 }
