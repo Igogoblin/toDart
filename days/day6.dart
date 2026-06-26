@@ -1,5 +1,3 @@
-import 'day4.dart';
-
 void main() {
   Set<String> passengerNames = {'Alice', 'Bob', 'Charlie', 'David', 'Eve'};
 
