@@ -19,7 +19,7 @@ void main() {
   print(getProfileStatus("Eve", null, 30));
   //print(welcomeMessage);
   String? status = null;
-  print(status ?? 'активен' ?? 'неизвестен');
+  print(status ?? 'активен');
 }
 
 /*В Dart по умолчанию все типы являются non-nullable (не могут принимать значение null).
