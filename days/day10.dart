@@ -15,9 +15,26 @@ void main() {
   }
   initApp(); // Инициализация переменной
   print(apiKey); // Вывод: 1234567890abcdef
+
+  print(parseServerResponse("Hello")); // Вывод: Строка: Hello
+  print(parseServerResponse(100)); // Вывод: Целое число: 100
+  print(parseServerResponse(3.14)); // Вывод: Число с плавающей точкой: 3.14
+  print(parseServerResponse(false)); // Вывод: Булев тип: false
+  print(
+    parseServerResponse([1, 2, 3]),
+  ); // Вывод: Неизвестный тип данных: List<int>
+  print(
+    parseServerResponse({"error": "Invalid request"}),
+  ); // Вывод: Ошибка: Invalid request
 }
 
 void processData(dynamic input) {
+  if (input is Map<String, dynamic>) {
+    if (input.containsKey("error")) {
+      print("Ошибка: ${input["error"]}");
+      return;
+    }
+  }
   if (input is int) {
     print("Вы ввели целое число: $input");
   } else if (input is double) {
@@ -34,4 +51,18 @@ late String apiKey; // Объявление переменной без иниц
 void initApp() {
   apiKey = "1234567890abcdef"; // Инициализация переменной
   print("API Key инициализирован: $apiKey");
+}
+
+String parseServerResponse(dynamic response) {
+  if (response is String) {
+    return "Строка: $response";
+  } else if (response is int) {
+    return "Целое число: $response";
+  } else if (response is double) {
+    return "Число с плавающей точкой: $response";
+  } else if (response is bool) {
+    return "Булев тип: $response";
+  } else {
+    return "Неизвестный тип данных: ${response.runtimeType}"; // Возвращаем строку с указанием типа данных
+  }
 }
