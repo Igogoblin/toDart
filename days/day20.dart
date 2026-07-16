@@ -6,12 +6,12 @@
 void main() {
   final authService = AuthService();
   authService.log("User logged in");
-  print("Dart".capitalize());
+  print("Dart".capitalize()); // Вывод: Dart
 }
 
 extension StringExtension on String {
   String capitalize() {
-    return '${this[0].toUpperCase()}${substring(1)}';
+    return '${this[0].toUpperCase()}${substring(1)}'; // Возвращает строку с первой заглавной буквой
   }
 }
 
