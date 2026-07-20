@@ -1,5 +1,6 @@
 /* Создай иерархию классов для игры: Абстрактный Hero (поля: name, hp, damage), классы Warrior и Mage. Создай класс Monster. Напиши цикл боя, пока у кого-то не кончится hp. Используй миксины для особых умений (например, миксин CriticalHit).
 Самопроверка: Код должен быть разбит на логические классы, методы инкапсулированы.
+ Добавь в свою RPG-игру инвентарь для героя. Инвентарь должен быть отдельным классом, содержащим List<Item>. Реализуй методы добавления и использования предметов (аптечки, свитки).
 */
 import 'dart:math';
 
@@ -67,5 +68,30 @@ class Warrior extends Hero with CriticalHit {
       print("${name} lands a critical hit!");
     }
     monster.hp -= damage;
+  }
+}
+
+class Inventory {
+  List<Item> items = [];
+
+  void addItem(Item item) {
+    items.add(item);
+    print("${item.name} added to inventory.");
+  }
+
+  void useItem(String itemName, Hero hero) {
+    final item = items.firstWhere(
+      (item) => item.name == itemName,
+      orElse: () => throw Exception("Item not found"),
+    );
+    item.use(hero);
+    items.remove(item);
+  }
+
+  void printInventory() {
+    print("Inventory:");
+    for (final item in items) {
+      print("${item.name} - ${item.description}");
+    }
   }
 }
