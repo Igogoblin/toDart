@@ -64,10 +64,49 @@ class Warrior extends Hero with CriticalHit {
     : super(name: name, hp: hp, damage: damage);
   void attack(Monster monster) {
     if (Random().nextInt(100) < 20) {
+      // 20% вероятность критического удара
       criticalHit();
       print("${name} lands a critical hit!");
     }
     monster.hp -= damage;
+  }
+}
+
+abstract class Item {
+  String name;
+  String description;
+
+  Item({required this.name, required this.description});
+
+  void use(Hero hero);
+}
+
+class Medkit extends Item {
+  final int healing;
+
+  Medkit({required String name, required this.healing})
+    : super(name: name, description: 'Restores $healing hp');
+
+  @override
+  void use(Hero hero) {
+    hero.hp += healing;
+    print('${hero.name} uses $name and recovers $healing hp.');
+  }
+}
+
+class Scroll extends Item {
+  final int damageBoost;
+
+  Scroll({required String name, required this.damageBoost})
+    : super(
+        name: name,
+        description: 'Increases damage by $damageBoost for one attack',
+      );
+
+  @override
+  void use(Hero hero) {
+    hero.damage += damageBoost;
+    print('${hero.name} uses $name and gains $damageBoost damage.');
   }
 }
 
