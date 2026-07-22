@@ -5,22 +5,32 @@
 
 void main() async {
   print('Start');
-  final weather = await fetchWeather(2);
-  final weather2 = fetchWeather(3);
-  print(weather);
-  print(weather2);
+
+  final weather = await fetchWeather();
   print('End');
+  print(weather);
 }
 
-Future<String> fetchWeather(t) {
-  return Future.delayed(
-    Duration(seconds: t),
-    () => '+25°C',
-  ); // имитация запроса к серверу
+Future<String> fetchWeather() async {
+  try {
+    await Future.delayed(Duration(seconds: 2));
+    return '+25°C';
+  } catch (e) {
+    return '0°C';
+  }
+}
+
   /*
 future - объект, который представляет собой результат асинхронной операции, которая может завершиться успешно или с ошибкой
 delayd - задержка, имитация запроса к серверу
 duration - длительность, время задержки
 
 */
-}
+
+
+/* try-catch в связке с async/await, метод .catchError().
+Практика: Модифицируй fetchWeather() так, чтобы она с вероятностью 50% выбрасывала ошибку сервера. Обработай эту ошибку в main так, чтобы приложение не падало, а выводило дефолтную погоду «0°C».
+Самопроверка: Как поймать ошибку асинхронной функции без использования ключевого слова await?
+ответ: с помощью метода .catchError() у Future, который возвращает асинхронная функция.
+которую нужно изменить, чтобы она с вероятностью 50% выбрасывала ошибку сервера.
+*/
