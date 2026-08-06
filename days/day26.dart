@@ -6,6 +6,8 @@ void main() {
   final dataResultUser = DataResult<User>(user, null, false);
 
   final dataResultProducts = DataResult<List<Product>>(products, null, false);
+
+  print(show());
 }
 
 class DataResult<T> {
@@ -35,3 +37,7 @@ List<Product> products = [];
 
 final user = User('John', 30);
 final product = Product('Laptop', 1500.0);
+
+String show() {
+  return 'User: ${user.name}, Age: ${user.age}, Product: ${product.name}, Price: ${product.price}';
+}
